@@ -54,67 +54,72 @@ class TodoApp extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        children: const [
-          TaskWidget(
-            color: Color.fromRGBO(188, 151, 192, 1),
-            icon: Icons.notifications,
-            task_info: "The family's trip to Finland next summer",
-            task: 'Plannded trip to Finland',
-            time: 'yesterday',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(131, 145, 158, 1),
-            icon: Icons.notifications_none_outlined,
-            task_info: "",
-            task: "Plan Susan's birthday",
-            time: 'Today 11:00',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(131, 145, 158, 1),
-            icon: Icons.notifications_none_outlined,
-            task_info:
-                "Get tomatoes, lettuce, potatoes, green beans, cream and beef fillet. Also buy red wine at Johns Wine Shop",
-            task: 'Groceries for dinner',
-            time: 'yesterday',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(177, 176, 174, 1),
-            icon: Icons.notifications_none_outlined,
-            task_info: "Send presentation to Bill",
-            task: 'Port projects',
-            time: 'yesterday',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(177, 176, 174, 1),
-            icon: Icons.notifications_none_outlined,
-            task_info: "",
-            task: 'Take jacket for cleaning',
-            time: 'Fri 30, Oct',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(188, 151, 192, 1),
-            icon: Icons.notifications_none_outlined,
-            task_info: "Install latest update and check wireless connection",
-            task: "Fix Dad's PC",
-            time: '',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(188, 151, 192, 1),
-            icon: Icons.clear,
-            task_info: "Talk to Monica about the trip",
-            task: 'Trip to Stockholm',
-            time: '',
-          ),
-          TaskWidget(
-            color: Color.fromRGBO(188, 151, 192, 1),
-            icon: Icons.clear,
-            task_info: "Talk to Monica about the trip",
-            task: 'Trip to Stockholm',
-            time: '',
-          ),
-        ],
-      ),
+      body: Column(mainAxisSize: MainAxisSize.max, children: [
+        ListView(
+          children: const [
+            TaskWidget(
+              color: Color.fromRGBO(188, 151, 192, 1),
+              icon: Icons.notifications,
+              task_info: "The family's trip to Finland next summer",
+              task: 'Plannded trip to Finland',
+              time: 'yesterday',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(131, 145, 158, 1),
+              icon: Icons.notifications_none_outlined,
+              task_info: "",
+              task: "Plan Susan's birthday",
+              time: 'Today 11:00',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(131, 145, 158, 1),
+              icon: Icons.notifications_none_outlined,
+              task_info:
+                  "Get tomatoes, lettuce, potatoes, green beans, cream and beef fillet. Also buy red wine at Johns Wine Shop",
+              task: 'Groceries for dinner',
+              time: 'yesterday',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(177, 176, 174, 1),
+              icon: Icons.notifications_none_outlined,
+              task_info: "Send presentation to Bill",
+              task: 'Port projects',
+              time: 'yesterday',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(177, 176, 174, 1),
+              icon: Icons.notifications_none_outlined,
+              task_info: "",
+              task: 'Take jacket for cleaning',
+              time: 'Fri 30, Oct',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(188, 151, 192, 1),
+              icon: Icons.notifications_none_outlined,
+              task_info: "Install latest update and check wireless connection",
+              task: "Fix Dad's PC",
+              time: '',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(188, 151, 192, 1),
+              icon: Icons.clear,
+              task_info: "Talk to Monica about the trip",
+              task: 'Trip to Stockholm',
+              time: '',
+            ),
+            TaskWidget(
+              color: Color.fromRGBO(188, 151, 192, 1),
+              icon: Icons.clear,
+              task_info: "Talk to Monica about the trip",
+              task: 'Trip to Stockholm',
+              time: '',
+            ),
+          ],
+        ),
+        Card(
+          child: ListTile(),
+        )
+      ]),
       floatingActionButton: const FloatingActionButton(
           onPressed: null,
           child: Icon(
