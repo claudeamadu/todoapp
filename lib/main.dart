@@ -54,8 +54,9 @@ class TodoApp extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(mainAxisSize: MainAxisSize.max, children: [
-        ListView(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
           children: const [
             TaskWidget(
               color: Color.fromRGBO(188, 151, 192, 1),
@@ -116,16 +117,51 @@ class TodoApp extends StatelessWidget {
             ),
           ],
         ),
-        Card(
-          child: ListTile(),
-        )
-      ]),
-      floatingActionButton: const FloatingActionButton(
-          onPressed: null,
-          child: Icon(
-            Icons.add,
-            size: 40,
-          )),
+      ),
+      floatingActionButton: const Padding(
+        padding: EdgeInsets.only(bottom: 50.0),
+        child: FloatingActionButton(
+            onPressed: null,
+            child: Icon(
+              Icons.add,
+              size: 40,
+            )),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          color: const Color.fromRGBO(221, 228, 238, 1),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.check_circle,
+                  color: Color.fromRGBO(50, 51, 101, 1),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Text("Completed",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(50, 51, 101, 1))),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 5.0),
+                  child: Icon(Icons.keyboard_arrow_down,
+                      color: Color.fromRGBO(50, 51, 101, 1)),
+                ),
+                Spacer(),
+                Text("24",
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromRGBO(50, 51, 101, 1))),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -134,6 +170,7 @@ class TaskWidget extends StatelessWidget {
   const TaskWidget({
     Key? key,
     required this.task,
+    // ignore: non_constant_identifier_names
     required this.task_info,
     required this.time,
     required this.icon,
