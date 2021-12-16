@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class CreateTodo extends StatelessWidget {
@@ -80,6 +78,20 @@ class CreateTodo extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              TextButton(
+                style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                onPressed: null,
+                child: const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("Create",
+                        style: TextStyle(color: Colors.white, fontSize: 25)),
+                  ),
+                ),
               )
             ],
           ),

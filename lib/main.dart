@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //HomeView from home_view.dart
-        home: const HomeView(),
+        home: HomeView(),
         debugShowCheckedModeBanner: false);
   }
 }

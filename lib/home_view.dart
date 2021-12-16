@@ -1,11 +1,41 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:todoapp/create_todo_view.dart';
+import 'package:todoapp/utilities.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
 
+  final List<Map<String, dynamic>> completedTask = [];
+  final List<Map<String, dynamic>> mydatabase = [
+    {
+      "taskTitle": "Plan trip to Accra",
+      "subTitle": "I will be going to Accra",
+      "time": "Yesterday",
+      "isCompleted": false
+    },
+    {
+      "taskTitle": "Work on final flutter project",
+      "subTitle": "Submit final project",
+      "time": "Yesterday",
+      "isCompleted": false
+    },
+    {
+      "taskTitle": "Do you have an iphone",
+      "subTitle": "No please",
+      "time": "Yesterday",
+      "isCompleted": true
+    }
+  ];
   @override
   Widget build(BuildContext context) {
+    for (var element in mydatabase) {
+      if (element['isCompleted'] == true) {
+        completedTask.add(element);
+      }
+    }
     return Scaffold(
       backgroundColor: const Color.fromRGBO(245, 243, 244, 1),
       appBar: AppBar(
@@ -48,56 +78,6 @@ class HomeView extends StatelessWidget {
               task: 'Plannded trip to Finland',
               time: 'yesterday',
             ),
-            TaskWidget(
-              color: Color.fromRGBO(131, 145, 158, 1),
-              icon: Icons.notifications_none_outlined,
-              task_info: "",
-              task: "Plan Susan's birthday",
-              time: 'Today 11:00',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(131, 145, 158, 1),
-              icon: Icons.notifications_none_outlined,
-              task_info:
-                  "Get tomatoes, lettuce, potatoes, green beans, cream and beef fillet. Also buy red wine at Johns Wine Shop",
-              task: 'Groceries for dinner',
-              time: 'yesterday',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(177, 176, 174, 1),
-              icon: Icons.notifications_none_outlined,
-              task_info: "Send presentation to Bill",
-              task: 'Port projects',
-              time: 'yesterday',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(177, 176, 174, 1),
-              icon: Icons.notifications_none_outlined,
-              task_info: "",
-              task: 'Take jacket for cleaning',
-              time: 'Fri 30, Oct',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(188, 151, 192, 1),
-              icon: Icons.notifications_none_outlined,
-              task_info: "Install latest update and check wireless connection",
-              task: "Fix Dad's PC",
-              time: '',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(188, 151, 192, 1),
-              icon: Icons.clear,
-              task_info: "Talk to Monica about the trip",
-              task: 'Trip to Stockholm',
-              time: '',
-            ),
-            TaskWidget(
-              color: Color.fromRGBO(188, 151, 192, 1),
-              icon: Icons.clear,
-              task_info: "Talk to Monica about the trip",
-              task: 'Trip to Stockholm',
-              time: '',
-            ),
           ],
         ),
       ),
@@ -117,37 +97,60 @@ class HomeView extends StatelessWidget {
               size: 40,
             )),
       ),
-      bottomSheet: Padding(
+      bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: const Color.fromRGBO(221, 228, 238, 1),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: const [
-                Icon(
-                  Icons.check_circle,
-                  color: Color.fromRGBO(50, 51, 101, 1),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text("Completed",
+        child: InkWell(
+          onTap: () {
+            showBarModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return ListView.separated(
+                      itemBuilder: (context, index) {
+                        return TaskWidget(
+                            task: completedTask[index]['taskTitle'],
+                            task_info: completedTask[index]['subTitle'],
+                            time: completedTask[index]['time'],
+                            icon: Icons.notifications,
+                            color: paint(completedTask[index]['time']));
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
+                      itemCount: completedTask.length);
+                });
+          },
+          child: Card(
+            color: const Color.fromRGBO(221, 228, 238, 1),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.check_circle,
+                    color: Color.fromRGBO(50, 51, 101, 1),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text("Completed",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(50, 51, 101, 1))),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 5.0),
+                    child: Icon(Icons.keyboard_arrow_down,
+                        color: Color.fromRGBO(50, 51, 101, 1)),
+                  ),
+                  Spacer(),
+                  Text("24",
+                      textAlign: TextAlign.right,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(50, 51, 101, 1))),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 5.0),
-                  child: Icon(Icons.keyboard_arrow_down,
-                      color: Color.fromRGBO(50, 51, 101, 1)),
-                ),
-                Spacer(),
-                Text("24",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(50, 51, 101, 1))),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -180,7 +183,7 @@ class TaskWidget extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             Icons.check_circle_outline,
-            color: color,
+            color: paint(time),
           ),
           title: Text(task,
               overflow: TextOverflow.ellipsis,
@@ -196,8 +199,8 @@ class TaskWidget extends StatelessWidget {
               verticalDirection: VerticalDirection.up,
               children: <Widget>[
                 // ignore: unnecessary_null_comparison
-                Icon(icon, size: 15, color: color),
-                Text(time, style: TextStyle(color: color)),
+                Icon(icon, size: 15, color: paint(time)),
+                Text(time, style: TextStyle(color: paint(time))),
               ],
             ),
           ),
